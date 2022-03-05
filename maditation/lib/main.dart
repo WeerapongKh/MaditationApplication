@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:maditation/pages/home.dart';
-import 'package:maditation/pages/start.dart';
-import 'package:maditation/pages/profile.dart';
-import 'package:maditation/pages/settime.dart';
+import 'package:maditation/page/home.dart';
+import 'package:maditation/page/start.dart';
+import 'package:maditation/page/profile.dart';
+import 'package:maditation/page/settime.dart';
 
 void main() {
   runApp(const MyApp());
