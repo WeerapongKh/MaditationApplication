@@ -13,7 +13,7 @@ class DetailScreen extends StatelessWidget {
         new Container(
           decoration: new BoxDecoration(
             image: new DecorationImage(
-              image: new AssetImage("assets/images/detail.png"),
+              image: new AssetImage("assets/images/detaill.png"),
               fit: BoxFit.cover,
             ),
           ),
