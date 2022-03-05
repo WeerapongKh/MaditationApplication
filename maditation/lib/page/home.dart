@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:maditation/pages/detail.dart';
-import 'package:maditation/pages/profile.dart';
+import 'package:maditation/page/detail.dart';
+import 'package:maditation/page/profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatelessWidget {

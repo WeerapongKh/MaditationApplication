@@ -1,10 +1,10 @@
 import 'package:maditation/timmersettings/countdowntimer.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:maditation/pages/home.dart';
-import 'package:maditation/pages/login.dart';
-import 'package:maditation/pages/profile.dart';
-import 'package:maditation/pages/settime.dart';
+import 'package:maditation/page/home.dart';
+import 'package:maditation/page/login.dart';
+import 'package:maditation/page/profile.dart';
+import 'package:maditation/page/settime.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({Key? key}) : super(key: key);
