@@ -93,6 +93,7 @@ flutter:
       fonts:
         - asset:  assets\fonts\Noto_Sans\NotoSansThai\NotoSansThai-Bold.ttf
         
+        
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
