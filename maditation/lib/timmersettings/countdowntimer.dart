@@ -55,7 +55,7 @@ class _CountDownTimerState extends State<CountDownTimer>
 
   final assetsAudioPlayer = AssetsAudioPlayer();
   void _counttime() {
-    if (timerString == '0:01') {
+    if (timerString == '0:00') {
       Selectimer.counttime = Selectimer.holder;
       String os = Selectimer.counttime.inMinutes.toString();
       getdata();
@@ -100,13 +100,13 @@ class _CountDownTimerState extends State<CountDownTimer>
     );
     controller.addListener(() {
       notifyend();
-      _counttime();
       if (controller.isAnimating) {
         setState(() {
           progress = controller.value;
         });
       } else {
         setState(() {
+          _counttime();
           progress = 1.0;
           isPlaying = false;
         });
