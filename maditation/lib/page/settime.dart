@@ -1,18 +1,36 @@
 // ignore_for_file: deprecated_member_use
-
+import 'package:maditation/database/date_db.dart';
+import 'package:intl/intl.dart';
+import 'package:maditation/model/date.dart';
 import 'package:maditation/timmersettings/countdowntimer.dart';
 import 'package:maditation/timmersettings/settings_card.dart';
 import 'package:maditation/timmersettings/settings_provider.dart';
+import 'package:maditation/timmersettings/switch.dart';
 import 'package:styled_widget/styled_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:maditation/timmersettings/perset_timers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:maditation/timmersettings/settings.dart';
-import 'package:flutter/cupertino.dart' as cupertino;
+import 'package:flutter/cupertino.dart';
+import 'package:buddhist_datetime_dateformat_sns/buddhist_datetime_dateformat_sns.dart';
 
 class SettimeScreen extends StatelessWidget {
-  const SettimeScreen({Key? key}) : super(key: key);
+  SettimeScreen({Key? key}) : super(key: key);
 
+  List<DataModel> data = [];
+
+  late DB db;
+
+  String os = Selectimer.counttime.inMinutes.toString();
+  void getdata() async {
+    db = DB();
+    data = await db.getData();
+  }
+
+  static var now = DateTime.now();
+  var toShow = now.yearInBuddhistCalendar;
+  static var formats = DateFormat.yMMMMEEEEd();
+  var toFormats = formats.formatInBuddhistCalendarThai(now);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,10 +72,7 @@ class SettimeScreen extends StatelessWidget {
                         ),
                       ),
                       leading: Icon(Icons.music_note),
-                      trailing: cupertino.CupertinoSwitch(
-                        value: false,
-                        onChanged: (value) {},
-                      ),
+                      trailing: Switch_playsound(),
                     ),
                     Spacer(
                       flex: 1,
@@ -70,6 +85,10 @@ class SettimeScreen extends StatelessWidget {
                           iconSize: 250,
                           // Within the `FirstRoute` widget
                           onPressed: () {
+                            //getdata();
+                            // db.insertData(
+                            //     DataModel(day: "${toFormats}", minute: os));
+                            //  print(toFormats);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -99,8 +118,8 @@ class DropdownIssue extends StatefulWidget {
 }
 
 class _DropdownIssueState extends State<DropdownIssue> {
-  int currentValue = 0;
-  Duration dropdownValue = Duration(minutes: 5);
+  int currentValue = 5;
+  Duration dropdownValue = Duration(minutes: 1);
 
   @override
   Widget build(BuildContext context) {
@@ -141,5 +160,8 @@ class _DropdownIssueState extends State<DropdownIssue> {
 }
 
 class Selectimer {
-  static late Duration holder = Duration(minutes: 5);
+  static late Duration holder = Duration(minutes: 1);
+  static bool playsound = true;
+  static late Duration counttime = Duration(minutes: 1);
+  static late int oa = 0;
 }

@@ -3,11 +3,15 @@ import 'package:maditation/page/start.dart';
 import 'package:maditation/themes.dart';
 import 'package:maditation/utils/user_preferences.dart';
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await UserPreferences.init();
+  Intl.defaultLocale = "th";
+  initializeDateFormatting();
 
   runApp(const MyApp());
 }
@@ -24,14 +28,16 @@ class MyApp extends StatelessWidget {
     final user = UserPreferences.getUser();
 
     return ThemeProvider(
-      initTheme: user.isDarkMode ? MyThemes.darkTheme : MyThemes.lightTheme,
+      //user.isDarkMode ? MyThemes.darkTheme :
+      initTheme: MyThemes.lightTheme,
       child: Builder(
-          builder: (context) => MaterialApp(
-                debugShowCheckedModeBanner: false,
-                theme: Theme.of(context),
-                title: title,
-                home: const StartScreen(),
-              )),
+        builder: (context) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: Theme.of(context),
+          title: title,
+          home: const StartScreen(),
+        ),
+      ),
     );
   }
 }

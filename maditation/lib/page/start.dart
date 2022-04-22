@@ -5,6 +5,7 @@ import 'package:maditation/page/home.dart';
 import 'package:maditation/page/login.dart';
 import 'package:maditation/page/profile.dart';
 import 'package:maditation/page/settime.dart';
+import 'dart:async';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({Key? key}) : super(key: key);
@@ -25,34 +26,53 @@ class StartScreen extends StatelessWidget {
         new Positioned(
           bottom: -80,
           left: 68,
-          child: Button(),
+          child: SplashScreen(),
         )
       ],
     ));
   }
 }
 
-class Button extends StatefulWidget {
-  const Button({Key? key}) : super(key: key);
-
+class SplashScreen extends StatefulWidget {
   @override
-  _ButtonState createState() => _ButtonState();
+  State<StatefulWidget> createState() => StartState();
 }
 
-//ส่วนของปุ่ม------------------------------------------------
-class _ButtonState extends State<Button> {
+class StartState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
-    return new IconButton(
-        icon: Image.asset('assets/images/Button-start.png'),
-        iconSize: 250,
-        // Within the `FirstRoute` widget
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const ButtomNavigation()),
-          );
-        });
+    return initScreen(context);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    startTimer();
+  }
+
+  startTimer() async {
+    var duration = Duration(seconds: 3);
+    return new Timer(duration, route);
+  }
+
+  route() {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => ButtomNavigation()));
+  }
+
+  initScreen(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            CircularProgressIndicator(
+              backgroundColor: Color.fromARGB(255, 0, 0, 0),
+              strokeWidth: 1,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
 

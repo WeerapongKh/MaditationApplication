@@ -4,6 +4,11 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:maditation/page/settime.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:buddhist_datetime_dateformat_sns/buddhist_datetime_dateformat_sns.dart';
+import 'package:intl/intl.dart';
+import '../database/date_db.dart';
+import '../model/date.dart';
 
 class CountScreen extends StatelessWidget {
   @override
@@ -27,10 +32,63 @@ class CountDownTimer extends StatefulWidget {
 class _CountDownTimerState extends State<CountDownTimer>
     with TickerProviderStateMixin {
   late AnimationController controller;
-
+  double progress = 1.0;
+  bool isPlaying = false;
+  Duration count = Selectimer.holder;
   String get timerString {
     Duration duration = controller.duration! * controller.value;
     return '${duration.inMinutes}:${(duration.inSeconds % 60).toString().padLeft(2, '0')}';
+  }
+
+  List<DataModel> data = [];
+  late DB db;
+
+  void getdata() async {
+    db = DB();
+    data = await db.getData();
+  }
+
+  static var now = DateTime.now();
+  var toShow = now.yearInBuddhistCalendar;
+  static var formats = DateFormat.yMMMMEEEEd();
+  var toFormats = formats.formatInBuddhistCalendarThai(now);
+
+  final assetsAudioPlayer = AssetsAudioPlayer();
+  void _counttime() {
+    if (timerString == '0:01') {
+      Selectimer.counttime = Selectimer.holder;
+      String os = Selectimer.counttime.inMinutes.toString();
+      getdata();
+      db.insertData(DataModel(day: "${toFormats}", minute: os));
+    }
+  }
+
+  void _soundBg() {
+    if (Selectimer.playsound == true) {
+      assetsAudioPlayer.open(
+        Audio("assets/audio/soundbg.mp3"),
+        autoStart: true,
+      );
+    }
+  }
+
+  void notifyend() {
+    if (timerString == '0:00') {
+      Selectimer.counttime = Selectimer.holder;
+      // db.insertData(
+      //     DataModel(day: "${toFormats}", minute: os));
+      assetsAudioPlayer.open(
+        Audio("assets/audio/assets_audio_gong.mp3"),
+      );
+    }
+  }
+
+  void notifystart() {
+    if (Selectimer.playsound != true) {
+      assetsAudioPlayer.open(
+        Audio("assets/audio/assets_audio_gong.mp3"),
+      );
+    }
   }
 
   @override
@@ -38,8 +96,28 @@ class _CountDownTimerState extends State<CountDownTimer>
     super.initState();
     controller = AnimationController(
       vsync: this,
-      duration: Selectimer.holder,
+      duration: count,
     );
+    controller.addListener(() {
+      notifyend();
+      _counttime();
+      if (controller.isAnimating) {
+        setState(() {
+          progress = controller.value;
+        });
+      } else {
+        setState(() {
+          progress = 1.0;
+          isPlaying = false;
+        });
+      }
+    });
+  }
+
+  void dispose() {
+    assetsAudioPlayer.dispose();
+    controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -110,9 +188,12 @@ class _CountDownTimerState extends State<CountDownTimer>
                                           fontFamily: 'Notosans',
                                         ),
                                         onPressed: () {
-                                          if (controller.isAnimating)
+                                          if (controller.isAnimating) {
+                                            assetsAudioPlayer.pause();
                                             controller.stop();
-                                          else {
+                                          } else {
+                                            notifystart();
+                                            _soundBg();
                                             controller.reverse(
                                                 from: controller.value == 0.0
                                                     ? 1.0
