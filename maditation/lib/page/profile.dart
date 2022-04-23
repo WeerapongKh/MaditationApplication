@@ -175,10 +175,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     dateTime,
                     style: const TextStyle(fontSize: 18),
                   ),
-                  leading: const ImageIcon(
-                    AssetImage("assets/images/iconM.png"),
-                    size: 40,
-                  ),
+                  // leading: const ImageIcon(
+                  //   AssetImage("assets/images/iconM.png"),
+                  //   size: 40,
+                  // ),
                 ),
               ),
               currenWeek(),
