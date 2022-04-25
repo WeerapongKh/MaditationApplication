@@ -38,6 +38,7 @@ dependencies:
   get: ^4.6.1
   flutter_neumorphic: ^3.2.0
   google_fonts: ^2.3.1
+  change_app_package_name: ^1.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -48,7 +49,6 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   salomon_bottom_bar: ^3.2.0
-  flutter_ringtone_player: ^3.0.0
   percent_indicator: ^3.4.0
   cupertino_icons: ^1.0.4
   circular_countdown_timer: ^0.2.0

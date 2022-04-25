@@ -15,10 +15,13 @@ class ButtomWidget extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           primary: Colors.pink.shade100,
           shape: const StadiumBorder(),
-          onPrimary: Colors.white,
+          onPrimary: Color.fromARGB(255, 0, 0, 0),
           padding: const EdgeInsets.symmetric(horizontal: 34, vertical: 7),
         ),
-        child: Text(text),
+        child: Text(
+          text,
+          style: TextStyle(fontFamily: 'NotoSans'),
+        ),
         onPressed: onClicked,
       );
 }

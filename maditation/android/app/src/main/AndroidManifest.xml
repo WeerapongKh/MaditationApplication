@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.maditation">
+    package="com.jel.maditation">
    <application
-        android:label="maditation"
+        android:label="ทำสมาธิ"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
         new Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(20),
           child: ListView(
             children: [
               SizedBox(height: 280),
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                 ),
                 onTap: () => _launchURL(),
               ),
-              SizedBox(height: 30),
+              SizedBox(height: 45),
               InkWell(
                   child: Image.asset(
                     "assets/images/card-2.png",

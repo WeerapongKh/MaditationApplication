@@ -1,5 +1,5 @@
 const List<Duration> kPresetTimers = <Duration>[
-  Duration(minutes: 1),
+  Duration(minutes: 5),
   Duration(minutes: 10),
   Duration(minutes: 15),
   Duration(minutes: 20),

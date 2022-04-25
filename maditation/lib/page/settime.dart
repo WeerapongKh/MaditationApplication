@@ -119,7 +119,7 @@ class DropdownIssue extends StatefulWidget {
 
 class _DropdownIssueState extends State<DropdownIssue> {
   int currentValue = 5;
-  Duration dropdownValue = Duration(minutes: 1);
+  Duration dropdownValue = Duration(minutes: 5);
 
   @override
   Widget build(BuildContext context) {
@@ -160,8 +160,8 @@ class _DropdownIssueState extends State<DropdownIssue> {
 }
 
 class Selectimer {
-  static late Duration holder = Duration(minutes: 1);
+  static late Duration holder = Duration(minutes: 5);
   static bool playsound = true;
-  static late Duration counttime = Duration(minutes: 1);
+  static late Duration counttime = Duration(minutes: 5);
   static late int oa = 0;
 }
